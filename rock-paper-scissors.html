@@ -1,0 +1,229 @@
+<DOCTYPE! html>
+<html>
+    <head>
+        <title>Rock Paper Scissors!</title>
+        <style>
+        
+        html {
+            background-image: url("rock_paper_scissors_w1.jpeg");
+            background-size: cover;
+            font-family: arial;
+        }
+
+        span {
+            font-size: 30px;
+        }
+
+        #buttons {
+            margin-top: 30px;
+        }
+
+        div#buttons button {
+            font-size: 20px;
+            color: #616161;
+            padding: 20px 50px;
+            border-radius: 7px;
+            margin-right: 10px;
+            margin-left: 10px;
+        }
+
+        h1:hover {
+        text-shadow: 0 0 7px;
+        }
+
+        h1 {
+            text-transform: uppercase;
+            word-spacing: 0.3em;
+            text-shadow: 0 0 3px;
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+        #container {
+            margin-top: 100px;
+            margin-left: 26%;
+            padding: 50px 20px;
+            text-align: center;
+            width: 600px;
+            height: 400px;
+            background-color: rgba(75, 75, 75, 0.6);
+            border-radius: 30px;
+            box-shadow: 9px 9px 30px;
+        }
+
+        #stuff {
+            margin-top: 26px;
+            background-color: rgba(212, 212, 212, 0.6);
+            border-radius: 20px;
+            box-shadow: 7px 7px 30px;
+        }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <h1>Rock Paper Scissors!</h1>
+            <p>Choose an option below and play with the computer! <br> You have 5 rounds!</p>
+            <div id="buttons">
+                <button id="rock">Rock</button>
+                <button id="paper">Paper</button>
+                <button id="scissors">Scissors</button>
+            </div>
+            <div id="stuff">
+                <span></span>
+                <div id="status"></div>
+            </div>
+        </div>
+
+        <script>
+            
+            function computerPlay() {
+                randNum = (Math.random()) * 10;
+                randNum = (randNum % 3) + 1;
+                randNum = randNum - (randNum % 1);
+
+                switch(randNum) {
+                    case 1:
+                        return "rock";
+                        break;
+                    case 2:
+                        return "paper";
+                        break;
+                    case 3:
+                        return "scissors";
+                        break;
+                }
+            }
+
+
+            let playerPoints = 0,
+                computerPoints = 0,
+                total = 0;
+
+            function game(playerSelection) {
+
+                let computerSelection = computerPlay();
+                playRound(playerSelection, computerSelection);
+
+                total++;
+
+                function playRound(playerSelection, computerSelection) {
+                    if(playerSelection != computerSelection) {
+                        if (playerSelection == "rock") {
+                            if (computerSelection == "paper") {
+                                para1.textContent = "Player chose " + playerSelection;
+                                para2.textContent = "Computer chose " + computerSelection;
+                                para3.textContent = "Computer wins! paper beats rock!";
+                                status.appendChild(para1);
+                                status.appendChild(para2);
+                                status.appendChild(para3);
+                                computerPoints++;
+                                span.textContent = "Player: " + playerPoints + "\tComputer: " + computerPoints;
+                            }
+                            if (computerSelection == "scissors") {
+                                para1.textContent = "Player chose " + playerSelection;
+                                para2.textContent = "Computer chose " + computerSelection;
+                                para3.textContent = "Player wins! rock beats scissors!";
+                                status.appendChild(para1);
+                                status.appendChild(para2);
+                                status.appendChild(para3);
+                                playerPoints++;
+                                span.textContent = "Player: " + playerPoints + "\tComputer: " + computerPoints;
+                            }
+                        }
+                        if (playerSelection == "paper") {
+                            if (computerSelection == "rock") {
+                                para1.textContent = "Player chose " + playerSelection;
+                                para2.textContent = "Computer chose " + computerSelection;
+                                para3.textContent = "Player wins! paper beats rock!";
+                                status.appendChild(para1);
+                                status.appendChild(para2);
+                                status.appendChild(para3);
+                                playerPoints++;
+                                span.textContent = "Player: " + playerPoints + "\tComputer: " + computerPoints;
+                            }
+                            if (computerSelection == "scissors") {
+                                para1.textContent = "Player chose " + playerSelection;
+                                para2.textContent = "Computer chose " + computerSelection;
+                                para3.textContent = "Computer wins! scissors beat papers!";
+                                status.appendChild(para1);
+                                status.appendChild(para2);
+                                status.appendChild(para3);
+                                computerPoints++;
+                                span.textContent = "Player: " + playerPoints + "\tComputer: " + computerPoints;
+                            }
+                        }
+                        if (playerSelection == "scissors") {
+                            if (computerSelection == "rock") {
+                                para1.textContent = "Player chose " + playerSelection;
+                                para2.textContent = "Computer chose " + computerSelection;
+                                para3.textContent = "Player wins! rock beats scissors!";
+                                status.appendChild(para1);
+                                status.appendChild(para2);
+                                status.appendChild(para3);
+                                playerPoints++;
+                                span.textContent = "Player: " + playerPoints + "\tComputer: " + computerPoints;
+                            }
+                            if (computerSelection == "paper") {
+                                para1.textContent = "Player chose " + playerSelection;
+                                para2.textContent = "Computer chose " + computerSelection;
+                                para3.textContent = "Player wins! paper beat scissors!";
+                                status.appendChild(para1);
+                                status.appendChild(para2);
+                                status.appendChild(para3);
+                                computerPoints++;
+                                span.textContent = "Player: " + playerPoints + "        Computer: " + computerPoints;
+                            }
+                        }
+                    }
+                    else {
+                        para1.textContent = "Player chose " + playerSelection;
+                        para2.textContent = "Computer chose " + computerSelection;
+                        para3.textContent = "Tie! " + playerSelection + " ties with " + computerSelection + "!";
+                        status.appendChild(para1);
+                        status.appendChild(para2);
+                        status.appendChild(para3);
+                        computerPoints++;
+                        playerPoints++;
+                        span.textContent = "Player: " + playerPoints + "\tComputer: " + computerPoints;
+                    }
+                }
+            }
+
+            
+            const buttons = document.querySelectorAll('button');
+            const para1 = document.createElement("p");
+            const para2 = document.createElement("p");
+            const para3 = document.createElement("p");
+            const status = document.querySelector("#status");
+            const span = document.querySelector("span");
+
+            buttons.forEach((button) => {
+                button.addEventListener("click", (e) => {
+                    if(total < 5) {
+                        game(button.id);
+                    } else {
+                        para1.textContent = "";
+                        para2.textContent = "";
+                        para3.textContent = "";
+                        status.appendChild(para1);
+                        status.appendChild(para2);
+                        status.appendChild(para3);
+
+                        status.style.paddingTop = "10px";
+
+                        if(playerPoints > computerPoints) {
+                            span.textContent = "Player wins with " + playerPoints + " points!";
+                        } else if (playerPoints < computerPoints) {
+                            span.textContent = "Computer wins with " + computerPoints + " points!";
+                        } else {
+                            span.textContent = "It's a Tie!!";
+                        }
+                    }
+                });
+            });
+            
+        </script>
+    </body>
+</html>
