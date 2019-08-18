@@ -151,8 +151,6 @@ buttons.forEach((button) => {
             status.appendChild(para2);
             status.appendChild(para3);
 
-            status.style.paddingTop = "10px";
-
             if(playerPoints > computerPoints) {
                 score.textContent = "Player wins with " + playerPoints + " points!";
             } else if (playerPoints < computerPoints) {
@@ -160,7 +158,6 @@ buttons.forEach((button) => {
             } else {
                 score.textContent = "It's a Tie!!";
             }
-            score.style.marginTop = "0";
         }
     });
 });
